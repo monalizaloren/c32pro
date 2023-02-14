@@ -4,6 +4,7 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 var engine, world, backgroundImg, waterSound, backgroundMusic, cannonExplosion;
 var canvas, angle, tower, ground, cannon, boat;
+
 var balls = [];
 var boats = [];
 
@@ -16,9 +17,10 @@ var brokenBoatSpritedata, brokenBoatSpritesheet;
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
   towerImage = loadImage("./assets/tower.png");
-  boatSpritedata = loadJSON("assets/boat/boat.json");
+  //Utilize o código que carrega os frames da imagem
+  boatSpritedata = ???("assets/boat/boat.json");
   boatSpritesheet = loadImage("assets/boat/boat.png");
-  brokenBoatSpritedata = loadJSON("assets/boat/broken_boat.json");
+  brokenBoatSpritedata = ???("assets/boat/broken_boat.json");
   brokenBoatSpritesheet = loadImage("assets/boat/broken_boat.png");
 }
 
@@ -32,14 +34,14 @@ function setup() {
   cannon = new Cannon(180, 110, 100, 50, angle);
 
   var boatFrames = boatSpritedata.frames;
-  for (var i = 0; i < boatFrames.length; i++) {
+  //Inicie o loop for
     var pos = boatFrames[i].position;
     var img = boatSpritesheet.get(pos.x, pos.y, pos.w, pos.h);
     boatAnimation.push(img);
   }
 
   var brokenBoatFrames = brokenBoatSpritedata.frames;
-  for (var i = 0; i < brokenBoatFrames.length; i++) {
+  //Inicie o loop for novamente, porém o fim será o comprimento da brokenBoatFrames
     var pos = brokenBoatFrames[i].position;
     var img = brokenBoatSpritesheet.get(pos.x, pos.y, pos.w, pos.h);
     brokenBoatAnimation.push(img);
@@ -68,7 +70,7 @@ function draw() {
 }
 
 
-//creating the cannon ball on key press
+
 function keyPressed() {
   if (keyCode === DOWN_ARROW) {
     var cannonBall = new CannonBall(cannon.x, cannon.y);
@@ -78,7 +80,7 @@ function keyPressed() {
   }
 }
 
-// function to show the ball.
+
 function showCannonBalls(ball, index) {
   ball.display();
   if (ball.body.position.x >= width || ball.body.position.y >= height - 50) {
@@ -88,7 +90,7 @@ function showCannonBalls(ball, index) {
 }
 
 
-//function to show the boat
+
 function showBoats() {
   if (boats.length > 0) {
     if (
@@ -97,7 +99,7 @@ function showBoats() {
     ) {
       var positions = [-40, -60, -70, -20];
       var position = random(positions);
-      var boat = new Boat(
+      //Adicione o objeto do barco(
         width,
         height - 100,
         170,
@@ -127,7 +129,7 @@ function showBoats() {
 }
 
 
-//releasing the cannonball on key release
+
 function keyReleased() {
   if (keyCode === DOWN_ARROW) {
     balls[balls.length - 1].shoot();
